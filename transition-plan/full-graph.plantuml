@@ -29,7 +29,7 @@ rectangle Digitransit as digitransit {
 
 rectangle LIJ as lij {
     rectangle PubTrans as pubtrans
-    rectangle OMM as omm
+    rectangle OMM as fi.hsl.omm
 
     'FIXME: Uncomment, if should include vehicle positions
     'rectangle "Vehicle PC" as vpc
@@ -112,8 +112,8 @@ mqttmonov3 -down-> bessersmith
 bessersmith -down-> mqttgtfsrtv1tu
 mqttgtfsrtv1tu -down-> axentia
 
-omm -down-> pubtrans
-omm -down-> pulsar
+fi.hsl.omm -down-> pubtrans
+fi.hsl.omm -down-> pulsar
 pubtrans -down-> pulsar
 digitrafficapis -down-> pulsar
 
@@ -144,9 +144,9 @@ pulsarhttpgtfsrtv1tu -down-> httptuv1
 httpsav1 -down-> otphsl
 
 comms -down-> poikkeusinfo
-comms -down-> omm
+comms -down-> fi.hsl.omm
 operator -down-> muuli
-operator -down-> omm
+operator -down-> fi.hsl.omm
 
 hslalertnote .. httpsav1
 hslalertnote .. hslalerthidden

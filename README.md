@@ -28,17 +28,17 @@ Components are stored in their own Github Repositories:
 
 #### Common dependencies
 
-- [transitdata-common](https://github.com/HSLdevcom/transitdata-common) contains generic components and shared constants.
+- [transitdata-fi.hsl.common](https://github.com/HSLdevcom/transitdata-common) contains generic components and shared constants.
 
 #### Transitdata components
 
-- [transitdata-cache-bootstrapper](https://github.com/HSLdevcom/transitdata-cache-bootstrapper) fills journey-metadata to Redis cache for the next step
+- [transitdata-config.cache-bootstrapper](https://github.com/HSLdevcom/transitdata-cache-bootstrapper) fills journey-metadata to Redis config.cache for the next step
 - [transitdata-pubtrans-source](https://github.com/HSLdevcom/transitdata-pubtrans-source) polls changes to Pubtrans database and publishes the events to Pulsar as "raw-data"
 - [transitdata-stop-estimates](https://github.com/HSLdevcom/transitdata-stop-estimates) creates higher-level data (StopEstimates) from the raw-data where the data source is abstracted (bus, metro, train).
-- [transitdata-omm-cancellation-source](https://github.com/HSLdevcom/transitdata-omm-cancellation-source) reads OMM database and generates TripUpdate trip cancellations
+- [transitdata-fi.hsl.omm-cancellation-source](https://github.com/HSLdevcom/transitdata-fi.hsl.omm-cancellation-source) reads OMM database and generates TripUpdate trip cancellations
 - [transitdata-hslalert-source](https://github.com/HSLdevcom/transitdata-hslalert-source) reads trip cancellations from HSL public HTML API and generates TripUpdate cancellations. This is for transition period support and will be removed in the near future.
 - [transitdata-tripupdate-processor](https://github.com/HSLdevcom/transitdata-tripupdate-processor) reads the estimates and cancellations and generates GTFS-RT messages and publishes them to Pulsar
-- [transitdata-omm-alert-source](https://github.com/HSLdevcom/transitdata-omm-alert-source) reads OMM database and generates internal service alert messages.
+- [transitdata-fi.hsl.omm-alert-source](https://github.com/HSLdevcom/transitdata-fi.hsl.omm-alert-source) reads OMM database and generates internal service alert messages.
 - [transitdata-alert-processor](https://github.com/HSLdevcom/transitdata-alert-processor) reads internal service alert messages and generates GTFS-RT Service alerts
 - [pulsar-mqtt-gateway](https://github.com/HSLdevcom/pulsar-mqtt-gateway) routes Pulsar messages to MQTT broker.
 - [transitdata-gtfsrt-full-publisher](https://github.com/HSLdevcom/transitdata-gtfsrt-full-publisher) publishes GTFS-RT Full dataset based on the GTFS-RT TripUpdate topic.

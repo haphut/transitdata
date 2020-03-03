@@ -166,7 +166,7 @@ Some are not openly documented.
 - `https://<hidden-hslalert-endpoint>`
     - Format: `FULL_DATASET` GTFS Realtime
     - Content: Service Alerts and Trip Updates
-    - Required while both Poikkeusinfo and OMM are used for Service Alerts to pull the Poikkeusinfo content into Pulsar. At that time https://api.digitransit.fi/realtime/service-alerts/v1/ will just redirect to, reverse proxy to or cache Pulsar output.
+    - Required while both Poikkeusinfo and OMM are used for Service Alerts to pull the Poikkeusinfo content into Pulsar. At that time https://api.digitransit.fi/realtime/service-alerts/v1/ will just redirect to, reverse proxy to or config.cache Pulsar output.
 - https://dev.hsl.fi/gtfs-realtime/v1/trip-updates/
     - Format: `FULL_DATASET` GTFS Realtime
     - Content: Trip Updates
