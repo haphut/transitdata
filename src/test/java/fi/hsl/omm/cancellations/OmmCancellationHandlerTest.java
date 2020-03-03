@@ -3,11 +3,11 @@ package fi.hsl.omm.cancellations;
 import fi.hsl.*;
 import fi.hsl.common.transitdata.*;
 import fi.hsl.common.transitdata.proto.*;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OmmCancellationHandlerTest {
     @Test

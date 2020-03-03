@@ -3,13 +3,13 @@ package fi.hsl.tripupdate.cancellations;
 import com.google.protobuf.*;
 import com.google.transit.realtime.*;
 import fi.hsl.common.transitdata.proto.*;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HslCancellationAlertPollerTest {
     @Test
@@ -58,19 +58,25 @@ public class HslCancellationAlertPollerTest {
         assertEquals(InternalMessages.TripCancellation.Status.CANCELED, cancellation.getStatus());
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void testUrlError() throws IOException {
-        HSlCancellationAlertPoller.readFeedMessage("invalid-url");
+        assertThrows(IOException.class, () -> {
+            HSlCancellationAlertPoller.readFeedMessage("invalid-url");
+        });
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void testHttpError() throws IOException {
-        HSlCancellationAlertPoller.readFeedMessage("http://does.not.exist");
+        assertThrows(IOException.class, () -> {
+            HSlCancellationAlertPoller.readFeedMessage("http://does.not.exist");
+        });
     }
 
-    @Test(expected = InvalidProtocolBufferException.class)
+    @Test
     public void testProtobufError() throws IOException {
         URL textFile = getTestResource("test.txt");
-        HSlCancellationAlertPoller.readFeedMessage(textFile);
+        assertThrows(InvalidProtocolBufferException.class, () -> {
+            HSlCancellationAlertPoller.readFeedMessage(textFile);
+        });
     }
 }

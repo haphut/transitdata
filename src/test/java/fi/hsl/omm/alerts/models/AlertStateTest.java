@@ -2,13 +2,13 @@ package fi.hsl.omm.alerts.models;
 
 import fi.hsl.common.transitdata.proto.*;
 import fi.hsl.omm.alerts.*;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.time.*;
 import java.util.*;
 import java.util.function.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AlertStateTest {
 

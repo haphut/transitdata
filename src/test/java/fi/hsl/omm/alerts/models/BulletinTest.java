@@ -1,6 +1,6 @@
 package fi.hsl.omm.alerts.models;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.*;
 
 import static java.util.Arrays.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BulletinTest {
     @Test

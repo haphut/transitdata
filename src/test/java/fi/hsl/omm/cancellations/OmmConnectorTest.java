@@ -1,6 +1,6 @@
 package fi.hsl.omm.cancellations;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.time.*;
 

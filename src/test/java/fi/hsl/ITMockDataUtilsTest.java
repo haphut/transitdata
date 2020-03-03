@@ -1,12 +1,14 @@
 package fi.hsl;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 import org.slf4j.*;
 
 import java.util.*;
 import java.util.regex.*;
 
-import static junit.framework.TestCase.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
+
 
 public class ITMockDataUtilsTest {
     static final Logger logger = LoggerFactory.getLogger(ITMockDataUtilsTest.class);
@@ -25,8 +27,8 @@ public class ITMockDataUtilsTest {
     @Test
     public void testJoreIdGenerator() {
         long id = MockDataUtils.generateValidJoreId();
-        assertTrue(id > 999999999999999L);
-        assertTrue(id < 10000000000000000L);
+        assertTrue("not true", id > 999999999999999L);
+        assertTrue("not true", id < 10000000000000000L);
         logger.info("id " + id);
     }
 
@@ -37,6 +39,6 @@ public class ITMockDataUtilsTest {
         assertEquals(length, seq.size());
 
         Integer[] expected = {0, 1, 2, 3, 4};
-        assertTrue(Arrays.equals(expected, seq.toArray(new Integer[0])));
+        assertTrue("Not true", Arrays.equals(expected, seq.toArray(new Integer[0])));
     }
 }
