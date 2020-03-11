@@ -3,12 +3,7 @@ package fi.hsl;
 import com.google.protobuf.*;
 import com.typesafe.config.*;
 import fi.hsl.common.pulsar.*;
-import fi.hsl.hfp.*;
-import fi.hsl.metro.*;
 import fi.hsl.rail.*;
-import fi.hsl.tripupdate.arrival.*;
-import fi.hsl.tripupdate.cancellations.*;
-import fi.hsl.tripupdate.departure.*;
 import org.apache.pulsar.client.api.*;
 import org.slf4j.*;
 import org.springframework.boot.autoconfigure.*;
@@ -63,11 +58,6 @@ public class TransitdataApplication {
         } catch (Exception e) {
             log.error("Exception at HSLRailSourceMain: " + e.getMessage(), e);
         }
-        TripUpdateCancellations.main(args);
-        ArrivalMain.main(args);
-        DepartureMain.main(args);
-        MetroMain.main(args);
-        HFPMain.main(args);
     }
 
     private static void closeApplication(PulsarApplication app, ScheduledExecutorService scheduler) {

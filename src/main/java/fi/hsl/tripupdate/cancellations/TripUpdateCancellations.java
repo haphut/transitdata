@@ -6,16 +6,19 @@ import fi.hsl.common.config.*;
 import fi.hsl.common.pulsar.*;
 import org.apache.pulsar.client.api.*;
 import org.slf4j.*;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.*;
 import java.io.*;
 import java.util.concurrent.*;
 
+@Service
 public class TripUpdateCancellations {
 
     private static final Logger log = LoggerFactory.getLogger(TripUpdateCancellations.class);
 
-    public static void main(String[] args) {
-
+    @PostConstruct
+    public void init() {
         try {
             final Config config = ConfigParser.createConfig();
             final PulsarApplication app = PulsarApplication.newInstance(config);
@@ -39,7 +42,6 @@ public class TripUpdateCancellations {
                     closeApplication(app, scheduler);
                 }
             }, 0, pollIntervalInSeconds, TimeUnit.SECONDS);
-
 
         } catch (Exception e) {
             log.error("Exception at Main: " + e.getMessage(), e);

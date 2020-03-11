@@ -7,13 +7,16 @@ import fi.hsl.common.pubtrans.*;
 import fi.hsl.common.pulsar.*;
 import org.apache.pulsar.client.api.*;
 import org.slf4j.*;
+import org.springframework.stereotype.*;
 import redis.clients.jedis.exceptions.*;
 
+import javax.annotation.*;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+@Service
 public class DepartureMain {
 
     private static final Logger log = LoggerFactory.getLogger(DepartureMain.class);
@@ -41,7 +44,8 @@ public class DepartureMain {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
-    public static void main(String[] args) {
+    @PostConstruct
+    public void init() {
         log.info("Starting Pubtrans Source Application");
         try {
             String table = ConfigUtils.getEnvOrThrow("PT_TABLE");

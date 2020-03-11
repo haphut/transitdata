@@ -3,12 +3,17 @@ package fi.hsl.metro;
 import com.typesafe.config.*;
 import fi.hsl.common.config.*;
 import fi.hsl.common.pulsar.*;
-import org.slf4j.*;
+import lombok.extern.slf4j.*;
+import org.springframework.stereotype.*;
 
+import javax.annotation.*;
+
+@Service
+@Slf4j
 public class MetroMain {
-    private static final Logger log = LoggerFactory.getLogger(MetroMain.class);
 
-    public static void main(String[] args) {
+    @PostConstruct
+    public void init() {
         log.info("Starting Metro-ats Parser");
         Config config = ConfigParser.createConfig();
         try (PulsarApplication app = PulsarApplication.newInstance(config)) {
