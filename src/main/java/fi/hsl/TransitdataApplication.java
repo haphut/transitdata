@@ -2,13 +2,9 @@ package fi.hsl;
 
 import com.google.protobuf.*;
 import com.typesafe.config.*;
-import fi.hsl.common.cache.*;
-import fi.hsl.common.deduplication.*;
 import fi.hsl.common.pulsar.*;
 import fi.hsl.hfp.*;
 import fi.hsl.metro.*;
-import fi.hsl.omm.alerts.*;
-import fi.hsl.omm.cancellations.*;
 import fi.hsl.rail.*;
 import fi.hsl.tripupdate.arrival.*;
 import fi.hsl.tripupdate.cancellations.*;
@@ -67,13 +63,6 @@ public class TransitdataApplication {
         } catch (Exception e) {
             log.error("Exception at HSLRailSourceMain: " + e.getMessage(), e);
         }
-        Deduplication.main(args);
-        CacheMain.main(args);
-        //OMM Alerts
-        OmmAlerts.main(args);
-        //OMM Cancellations
-        OmmCancellations.main(args);
-        //Tripupdate cancellations
         TripUpdateCancellations.main(args);
         ArrivalMain.main(args);
         DepartureMain.main(args);

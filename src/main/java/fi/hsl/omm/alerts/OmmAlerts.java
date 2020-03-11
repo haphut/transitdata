@@ -5,18 +5,24 @@ import fi.hsl.common.config.*;
 import fi.hsl.common.pulsar.*;
 import org.apache.pulsar.client.api.*;
 import org.slf4j.*;
+import org.springframework.stereotype.*;
 
+import javax.annotation.*;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+@Service
 public class OmmAlerts {
 
     private static final Logger log = LoggerFactory.getLogger(OmmAlerts.class);
 
     public static void main(String[] args) {
+    }
 
+    @PostConstruct
+    public void init() {
         try {
             final Config config = ConfigParser.createConfig();
             final String connectionString = readConnectionString();

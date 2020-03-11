@@ -1,14 +1,13 @@
 package fi.hsl.common.cache;
 
-import org.slf4j.*;
+import lombok.extern.slf4j.*;
 
 import java.time.*;
 import java.time.format.*;
 import java.time.temporal.*;
 
+@Slf4j
 public class QueryUtils {
-
-    private static final Logger log = LoggerFactory.getLogger(QueryUtils.class);
 
     final String DVJ_ID = "dvj_id";
     final String DIRECTION = "direction";

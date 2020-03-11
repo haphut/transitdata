@@ -1,9 +1,11 @@
 package fi.hsl.common.cache;
 
 import com.microsoft.sqlserver.jdbc.*;
-import com.typesafe.config.*;
 import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
+import javax.annotation.*;
 import java.io.*;
 import java.sql.*;
 import java.time.*;
@@ -12,25 +14,24 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
 
+@Service
 public class CacheMain {
     private static final Logger log = LoggerFactory.getLogger(CacheMain.class);
 
-    private final Config config;
-
-    private final fi.hsl.common.pulsar.PulsarApplicationContext context;
-    private final String connectionString;
+    @Autowired
+    private fi.hsl.common.pulsar.PulsarApplicationContext context;
+    @Value("${pulsar.cache.connectionString}")
+    private String connectionString;
 
     private ScheduledExecutorService executor;
     private AtomicBoolean processingActive = new AtomicBoolean(false);
 
     private RedisUtils redisUtils;
     private QueryUtils queryUtils;
-
-    public CacheMain(fi.hsl.common.pulsar.PulsarApplicationContext context, String connectionString) {
-        this.context = context;
-        this.config = context.getConfig();
-        this.connectionString = connectionString;
-    }
+    @Value("${bootstrapper.queryHistoryInDays}")
+    private int queryHistoryInDays;
+    @Value("${bootstrapper.queryFutureInDays}")
+    private int queryFutureInDays;
 
     private static long secondsUntilNextEvenHour() {
         OffsetDateTime now = OffsetDateTime.now();
@@ -40,7 +41,9 @@ public class CacheMain {
         return Duration.between(now, evenHour).getSeconds();
     }
 
-    public static void main(String[] args) {
+
+    @PostConstruct
+    public void init() throws Exception {
         String connectionString = "";
 
         try {
@@ -56,15 +59,7 @@ public class CacheMain {
             log.error("Connection string empty, aborting.");
             System.exit(1);
         }
-        Config config = fi.hsl.common.config.ConfigParser.createConfig();
-
-        try (fi.hsl.common.pulsar.PulsarApplication app = fi.hsl.common.pulsar.PulsarApplication.newInstance(config)) {
-            fi.hsl.common.pulsar.PulsarApplicationContext context = app.getContext();
-            CacheMain cacheMain = new CacheMain(context, connectionString);
-            cacheMain.start();
-        } catch (Exception e) {
-            log.error("Exception at main", e);
-        }
+        this.start();
     }
 
     public void start() throws Exception {
@@ -82,8 +77,6 @@ public class CacheMain {
 
     private void initialize() {
         redisUtils = new RedisUtils(context);
-        final int queryHistoryInDays = config.getInt("bootstrapper.queryHistoryInDays");
-        final int queryFutureInDays = config.getInt("bootstrapper.queryFutureInDays");
         log.info("Fetching data from -" + queryHistoryInDays + " days to +" + queryFutureInDays + " days");
         queryUtils = new QueryUtils(queryHistoryInDays, queryFutureInDays);
     }

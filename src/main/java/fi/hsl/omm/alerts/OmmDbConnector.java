@@ -20,7 +20,7 @@ public class OmmDbConnector implements AutoCloseable {
     private Connection connection;
     private String connectionString;
 
-    public OmmDbConnector(Config config, int pollIntervalInSeconds, String jdbcConnectionString) {
+    OmmDbConnector(Config config, int pollIntervalInSeconds, String jdbcConnectionString) {
         timezone = config.getString("fi.hsl.omm.timezone");
         log.info("Using timezone " + timezone);
         queryAllModifiedAlerts = config.getBoolean("fi.hsl.omm.queryAllModifiedAlerts");
@@ -46,15 +46,15 @@ public class OmmDbConnector implements AutoCloseable {
 
     }
 
-    public BulletinDAO getBulletinDAO() {
+    BulletinDAO getBulletinDAO() {
         return bulletinDAO;
     }
 
-    public LineDAO getLineDAO() {
+    LineDAO getLineDAO() {
         return lineDAO;
     }
 
-    public StopPointDAO getStopPointDAO() {
+    StopPointDAO getStopPointDAO() {
         return stopPointDAO;
     }
 

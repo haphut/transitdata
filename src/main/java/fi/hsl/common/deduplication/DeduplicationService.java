@@ -4,11 +4,20 @@ import com.typesafe.config.*;
 import fi.hsl.common.config.*;
 import fi.hsl.common.pulsar.*;
 import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-public class Deduplication {
-    private static final Logger log = LoggerFactory.getLogger(Deduplication.class);
+import javax.annotation.*;
 
-    public static void main(String[] args) {
+@Service
+public class DeduplicationService {
+    private static final Logger log = LoggerFactory.getLogger(DeduplicationService.class);
+
+    @Autowired
+    private PulsarApplicationContext pulsarApplicationContext;
+
+    @PostConstruct
+    public void init() {
         log.info("Starting Hfp De-duplicator");
         Config config = ConfigParser.createConfig();
         Analytics analytics = null;
